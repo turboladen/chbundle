@@ -3,13 +3,16 @@ chbundle
 
 Gemfile switcher for projects that use multiple Gemfiles.
 
+Inspired, of course, by [chruby](https://github.com/postmodern/chruby).
+
 
 Features & Problems
 -------------------
 
 Features:
 
-* Updates `$BUNDLE_GEMFILE`
+* Updates `$BUNDLE_GEMFILE` so you don't have to
+  `$BUNDLE_GEMFILE=Gemfile.stuff bundle install`.
 
 Problems:
 

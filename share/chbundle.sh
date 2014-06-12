@@ -2,25 +2,25 @@ CHBUNDLE_VERSION="0.1.0"
 
 function chbundle_list()
 {
-  bundles=`ls Gemfile*[^lock] | cut -f2 -d"."`
-  echo "chbundle  version $CHBUNDLE_VERSION"
-  echo "bundles:"
+    bundles=`ls Gemfile*[^lock] | cut -f2 -d"."`
+    echo "chbundle  version $CHBUNDLE_VERSION"
+    echo "bundles:"
 
-  for bundle in $bundles
-  do
-    echo "- $bundle"
-  done
+    for bundle in $bundles
+    do
+        echo "- $bundle"
+    done
 }
 
 function chbundle_use()
 {
-  case "$1" in
-      default) selected="Gemfile" ;;
-      *)       selected="Gemfile.$1" ;;
-  esac
+    case "$1" in
+        default) selected="Gemfile" ;;
+        *)       selected="Gemfile.$1" ;;
+    esac
 
-  export BUNDLE_GEMFILE=$selected
-  echo "Now using $BUNDLE_GEMFILE"
+    export BUNDLE_GEMFILE=$selected
+    echo "Now using $BUNDLE_GEMFILE"
 }
 
 function chbundle()

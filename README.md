@@ -12,7 +12,8 @@ Features & Problems
 Features:
 
 * Updates `$BUNDLE_GEMFILE` so you don't have to
-  `$BUNDLE_GEMFILE=Gemfile.stuff bundle install`.
+  `$BUNDLE_GEMFILE=Gemfile.different_things bundle install`.
+* Supports bash and zsh.
 
 Problems:
 
@@ -79,3 +80,9 @@ Gemfile
 $ bundle install
 (goes and installs stuff based on Gemfile...)
 ```
+
+Development
+-----------
+
+Tests are written using [roundup](http://bmizerany.github.io/roundup/), so get
+that installed.

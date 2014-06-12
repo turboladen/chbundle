@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+source "${0%/*}/../share/chbundle/chbundle.sh"
+
+case "$1" in
+	-h|--help)
+		echo "usage: chbundle-exec BUNDLE"
+		exit
+		;;
+	-V|--version)
+		echo "chbundle version $CHBUNDLE_VERSION"
+		exit
+		;;
+esac
+
+if (( $# == 0 )); then
+	echo "chbundle-exec: BUNDLE required" >&2
+	exit 1
+fi
+
+argv=()
+
+for arg in $@; do
+	shift
+
+	if [[ "$arg" == "--" ]]; then break
+	else                          argv+=($arg)
+	fi
+done
+
+command="chbundle $argv && $*"
+
+if [[ -t 0 ]]; then exec "$SHELL" -i -l -c "$command"
+else                exec "$SHELL"    -l -c "$command"
+fi

@@ -6,6 +6,11 @@ function _chbundle_debug()
     if [[ -e $CHBUNDLE_DEBUG ]] ; then printf '%s\n' "$msg" ; fi ;
 }
 
+function _puts()
+{
+    printf '%s\n' "$1"
+}
+
 function chbundle_list()
 {
     local_shell=`ps -o command -p $$`
@@ -20,20 +25,20 @@ function chbundle_list()
             gemfiles=`GLOBIGNORE="*.lock" ls Gemfile* 2> /dev/null`
             ;;
         *)
-            printf "Not sure how to behave with this shell: $local_shell\n"
+            _puts "Not sure how to behave with this shell: $local_shell"
             return 1
             ;;
     esac
 
     bundles=`echo "$gemfiles" | cut -f2 -d"."`
-    printf "chbundle v$CHBUNDLE_VERSION\n"
+    _puts "chbundle v$CHBUNDLE_VERSION"
 
     # Print bundles if there are any.
     if [[ -n $bundles ]]
     then
-        printf "bundles:\n"
+        _puts "bundles:"
 
-        for bundle in $(printf "$bundles\n")
+        for bundle in $(_puts "$bundles")
         do
             # Name the bundle 'default' if "Gemfile" is found.
             if [[ "$bundle" == "Gemfile" ]]
@@ -68,11 +73,11 @@ function chbundle_list()
                 fi
             fi
 
-            printf "$prefix $bundle_name\n"
+            _puts "$prefix $bundle_name"
         done
     # Otherwise, let em know we didn't find any bundles.
     else
-        printf "No bundles found.\n"
+        _puts "No bundles found."
     fi
 }
 
@@ -84,7 +89,7 @@ function chbundle_use()
     esac
 
     export BUNDLE_GEMFILE=$selected
-    printf "Now using $BUNDLE_GEMFILE\n"
+    _puts "Now using $BUNDLE_GEMFILE"
 }
 
 function chbundle()

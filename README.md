@@ -22,6 +22,11 @@ Problems:
   manually `chbundle` to a valid bundle.
 
 
+You can, of course, just `export $BUNDLE_GEMFILE=Gemfile.neato` (which is what 
+`chbundle` does for you) then `bundle install` (or whatever bundler command),
+but that's **22** (* _gasp!_ *) more chars to type than `chbundle neato`!
+
+
 Configuration
 -------------
 

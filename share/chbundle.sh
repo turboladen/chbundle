@@ -3,7 +3,7 @@ CHBUNDLE_VERSION="0.1.0"
 function chbundle_list()
 {
     local_shell=`ps -o command -p $$`
-    # If zshell
+
     case "$local_shell" in
       *zsh)
         setopt extendedglob
@@ -26,10 +26,33 @@ function chbundle_list()
     do
       if [[ "$bundle" == "Gemfile" ]]
         then
-        echo "- default"
+        echo "in default..."
+        bundle_name="default"
+
+        if [[ -e $BUNDLE_GEMFILE ]]
+          then
+          echo "envvar set"
+          if [[ "Gemfile" == "$BUNDLE_GEMFILE" ]]
+            then
+            prefix="*-"
+          else
+            prefix=" -"
+          fi
+        else
+          prefix="*-"
+        fi
       else
-        echo "- $bundle"
+        bundle_name=$bundle
+
+        if [[ "$BUNDLE_GEMFILE" == *"$bundle" ]]
+          then
+          prefix="*-"
+        else
+          prefix=" -"
+        fi
       fi
+
+      echo "$prefix $bundle_name"
     done
 }
 

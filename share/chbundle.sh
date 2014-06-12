@@ -22,38 +22,42 @@ function chbundle_list()
     echo "chbundle  version $CHBUNDLE_VERSION"
     echo "bundles:"
 
-    for bundle in $(echo "$bundles")
-    do
-      if [[ "$bundle" == "Gemfile" ]]
+    if [[ -n $bundles ]]
+    then
+      for bundle in $(echo "$bundles")
+      do
+        if [[ "$bundle" == "Gemfile" ]]
         then
-        echo "in default..."
-        bundle_name="default"
+          bundle_name="default"
 
-        if [[ -e $BUNDLE_GEMFILE ]]
+          if [[ -e $BUNDLE_GEMFILE ]]
           then
-          echo "envvar set"
-          if [[ "Gemfile" == "$BUNDLE_GEMFILE" ]]
-            then
+            echo "envvar set"
+            if [[ "Gemfile" == "$BUNDLE_GEMFILE" ]]
+              then
+              prefix="*-"
+            else
+              prefix=" -"
+            fi
+          else
+            prefix="*-"
+          fi
+        else
+          bundle_name=$bundle
+
+          if [[ "$BUNDLE_GEMFILE" == *"$bundle" ]]
+          then
             prefix="*-"
           else
             prefix=" -"
           fi
-        else
-          prefix="*-"
         fi
-      else
-        bundle_name=$bundle
 
-        if [[ "$BUNDLE_GEMFILE" == *"$bundle" ]]
-          then
-          prefix="*-"
-        else
-          prefix=" -"
-        fi
-      fi
-
-      echo "$prefix $bundle_name"
-    done
+        echo "$prefix $bundle_name"
+      done
+    else
+        echo "No bundles found."
+    fi
 }
 
 function chbundle_use()

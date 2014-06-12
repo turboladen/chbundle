@@ -41,8 +41,8 @@ Use
 
 ```
 $ chbundle list
-chbundle  version 0.1.0
-Bundles:
+chbundle v0.1.0
+bundles:
 *- default
  - jruby
  - rbx

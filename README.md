@@ -58,13 +58,24 @@ Bundles:
 
 **Purpose:** Change to work in the context of `[bundle name]`.
 
+*Example:* Change to work in the context of `Gemfile.jruby`.
+
 ```
 $ chbundle jruby
 Now using Gemfile.jruby
 $ echo $BUNDLE_GEMFILE
 Gemfile.jruby
+$ bundle install
+(goes and installs stuff based on Gemfile.jruby...)
+```
+
+*Example:* Change to work in the context of `Gemfile`.
+
+```
 $ chbundle default
 Now using Gemfile
 $ echo $BUNDLE_GEMFILE
 Gemfile
+$ bundle install
+(goes and installs stuff based on Gemfile...)
 ```
